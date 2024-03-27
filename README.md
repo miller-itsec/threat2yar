@@ -4,11 +4,12 @@ Welcome to `threat2yar`, an advanced pipeline for automating the download, conve
 
 ## Pipeline Overview
 
-`threat2yar` encompasses three main scripts, each with a distinct role in processing threat data:
+`threat2yar` encompasses four main scripts, each with a distinct role in processing threat data:
 
 1. **Download Data (`download.py`):** Retrieves threat data from specified sources.
 2. **Generate YARA Rules (`convert_yara.py`):** Transforms threat descriptions into YARA rules.
-3. **Validate and Organize YARA Rules (`validate_yara.py`):** Assesses rule quality and organizes them accordingly.
+3. **Validate YARA Rules (`validate_yara.py`):** Assesses rule quality and syntax.
+4. **Generate Regex Rules (`generate_regex.py`):** Utilizes string similarity and OpenAI to generate regular expressions from extracted strings.
 
 Each component contributes to a robust process for thorough threat analysis.
 
@@ -43,7 +44,7 @@ Each component contributes to a robust process for thorough threat analysis.
 - Accurate and relevant YARA rule generation.
 - Customizable settings for API interactions and data processing.
 
-## Stage 3: Validate and Organize YARA Rules
+## Stage 3: Validate YARA Rules
 
 **Script Name:** `validate_yara.py`
 
@@ -56,6 +57,20 @@ Each component contributes to a robust process for thorough threat analysis.
 - Syntax validation and automatic correction process.
 - Complexity analysis to filter out overly simplistic or convoluted rules.
 - Organized categorization of rules for easy management.
+
+## Stage 4: Generate Regex Rules
+
+**Script Name:** `generate_regex.py`
+
+### Functionality:
+- Extracts strings from YARA rules and categorizes them based on similarity.
+- Utilizes OpenAI API to generate regular expressions from string clusters.
+- Filters regex rules based on complexity and relevance.
+
+### Key Features:
+- Efficient clustering of strings to optimize regex generation.
+- Integration with OpenAI API for accurate regex generation.
+- Automatic filtering of complex or irrelevant regex patterns.
 
 ## Command-Line Interface (CLI)
 
