@@ -1,6 +1,6 @@
 # config.py
 """
-Configuration Settings for threat2year's threat analysis pipeline
+Configuration Settings for threat2yar analysis pipeline
 
 This configuration file centralizes settings used across the scripts in the pipeline:
 - download.py: For downloading exploits.
