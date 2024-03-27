@@ -89,3 +89,7 @@ Execute specific stages or the entire process via CLI:
 ```bash
 python cli.py --api-key [Your_API_Key] --download-url [URL_Pattern] --min-id [Min_ID] --max-id [Max_ID] --file-pattern [File_Pattern] --stage [Stage]
 ```
+
+### Example:
+
+![Example](example.png?raw=true "Example output")
