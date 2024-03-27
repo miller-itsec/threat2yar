@@ -238,7 +238,10 @@ def process_yara_files(client):
     print(f"Total processing time: {end_time - start_time:.2f} seconds.")
 
 
-# Entry point
-if __name__ == "__main__":
+def main():
     openai_client = create_openai_client(OPENAI_API_KEY)
     process_yara_files(openai_client)
+
+# Entry point
+if __name__ == "__main__":
+    main()

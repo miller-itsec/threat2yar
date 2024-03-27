@@ -10,6 +10,7 @@ import argparse
 import download
 import convert_yara
 import validate_yara
+import generate_regex
 import importlib
 import config
 
@@ -21,6 +22,9 @@ def run_convert_yara():
 
 def run_validate_yara():
     validate_yara.main()
+
+def run_generate_regex():
+    generate_regex.main()
 
 def set_environment_vars(args):
     if args.api_key:
@@ -104,7 +108,7 @@ def main():
     parser.add_argument('--copy-mode', type=bool, help='Whether to copy files instead of moving')
     parser.add_argument('--silent-mode', type=bool, help='Whether to operate in silent mode')
     parser.add_argument('--fix-bad-rules', type=bool, help='Whether to attempt fixing bad YARA rules')
-    parser.add_argument('--stage', choices=['download', 'convert', 'validate', 'all'], help='Pipeline stage to run')
+    parser.add_argument('--stage', choices=['download', 'convert', 'validate', 'regex', 'all'], help='Pipeline stage to run')
 
     args = parser.parse_args()
     set_environment_vars(args)
@@ -116,6 +120,8 @@ def main():
         run_convert_yara()
     elif args.stage == 'validate':
         run_validate_yara()
+    elif args.stage == 'regex':
+        run_generate_regex()
     elif args.stage == 'all':
         run_download()
         run_convert_yara()

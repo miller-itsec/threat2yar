@@ -86,7 +86,7 @@ USER_AGENTS = [
 FILE_PATTERN = os.getenv('FILE_PATTERN', r'(.+)_(\d+)')
 FILE_GLOB_PATTERN = os.getenv('FILE_GLOB_PATTERN', '*.txt')
 # Note: this is to avoid exhaustion of OpenAPI queries. Re-running the script is safe, as duplicate work is avoided
-MAX_QUERIES_PER_RUN = int(os.getenv('MAX_QUERIES_PER_RUN', 10000))
+MAX_QUERIES_PER_RUN = int(os.getenv('MAX_QUERIES_PER_RUN', 15000))
 DELAY_QUERY_IN_SECONDS = float(os.getenv('DELAY_QUERY_IN_SECONDS', 0.2))
 SKIP_FILES_LARGER_THAN_KB = int(os.getenv('SKIP_FILES_LARGER_THAN_KB', 16))
 
