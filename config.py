@@ -1,6 +1,6 @@
 # config.py
 """
-Configuration Settings for Exploit Analysis Pipeline
+Configuration Settings for threat2year's threat analysis pipeline
 
 This configuration file centralizes settings used across the scripts in the pipeline:
 - download.py: For downloading exploits.
@@ -64,6 +64,8 @@ DELAY_NOT_FOUND = int(os.getenv('DELAY_NOT_FOUND', 10))
 USE_TOR = os.getenv('USE_TOR', 'False') == 'True'
 DOWNLOAD_FOLDER = os.getenv('DOWNLOAD_FOLDER', 'download-db')
 YARA_FOLDER = os.getenv('YARA_FOLDER', 'yara-db')
+PERFORM_DOMAIN_DOWNLOAD = False
+DOMAIN_DOWNLOAD_FILE_NAME = 'domains.txt'
 
 # Randomly pick a user agent
 USER_AGENTS = [

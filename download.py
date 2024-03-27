@@ -60,17 +60,54 @@ def download_data(data_id):
         print(f"Error downloading data for ID {data_id}: {e}")
 
 
+def download_from_domain(domain):
+    filename = os.path.join(DOWNLOAD_FOLDER, f"{domain.replace('.', '_')}.html")
+    url = f"http://{domain}"
+    headers = {'User-Agent': random.choice(USER_AGENTS)}
+    try:
+        print(f"Accessing {url}")
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            with open(filename, 'wb') as file:
+                file.write(response.content)
+            print(f"Downloaded HTML for {domain}")
+        else:
+            print(f"Failed to download from {domain}, status code: {response.status_code}")
+            print("Response text:", response.text)
+    except Exception as e:
+        print(f"Error downloading from {domain}: {e}")
+
+
 def main():
     if not os.path.exists(DOWNLOAD_FOLDER):
         os.makedirs(DOWNLOAD_FOLDER)
 
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        for data_id in reversed(range(MIN_DATA_ID, MAX_DATA_ID + 1)):
-            filename = os.path.join(DOWNLOAD_FOLDER, OUTPUT_FILE_PATTERN.format(data_id))
-            if os.path.exists(filename):
-                continue
-            executor.submit(download_data, data_id)
-            time.sleep(DELAY)
+    if PERFORM_DOMAIN_DOWNLOAD and os.path.exists(DOMAIN_DOWNLOAD_FILE_NAME):
+        with open(DOMAIN_DOWNLOAD_FILE_NAME, 'r') as file:
+            domains = []
+            for line in file:
+                line = line.strip()
+                if ',' in line:
+                    _, domain = line.split(',', 1)
+                    domains.append(domain.strip())
+                else:
+                    domains.append(line)
+
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            for domain in domains:
+                filename = os.path.join(DOWNLOAD_FOLDER, f"{domain.replace('.', '_')}.html")
+                if os.path.exists(filename):
+                    continue
+                executor.submit(download_from_domain, domain)
+                time.sleep(DELAY)
+    else:
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            for data_id in reversed(range(MIN_DATA_ID, MAX_DATA_ID + 1)):
+                filename = os.path.join(DOWNLOAD_FOLDER, OUTPUT_FILE_PATTERN.format(data_id))
+                if os.path.exists(filename):
+                    continue
+                executor.submit(download_data, data_id)
+                time.sleep(DELAY)
 
 
 if __name__ == "__main__":
