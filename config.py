@@ -104,8 +104,8 @@ OUTPUT_CVE_YEAR_PREFIX = os.getenv('OUTPUT_CVE_YEAR_PREFIX', 'year-')
 YARA_COMPLEXITY_THRESHOLD = 100
 
 YARA_BINARY_PATH = os.getenv('YARA_BINARY_PATH', '/opt/homebrew/bin/yara')
-COPY_MODE = os.getenv('COPY_MODE', 'True') == 'True'
-SILENT_MODE = os.getenv('SILENT_MODE', 'True') == 'True'
+COPY_MODE = os.getenv('COPY_MODE', 'False') == 'True'
+SILENT_MODE = os.getenv('SILENT_MODE', 'False') == 'True'
 FIX_BAD_RULES = os.getenv('FIX_BAD_RULES', 'True') == 'True'
 
 ######
