@@ -143,7 +143,7 @@ def print_cluster_statistics(clusters):
 
 
 # Main clustering and regex generation logic
-def process_yara_files(client):
+def process_yara_files(openai_client):
     start_time = time.time()
     clusters = {"short": {}, "medium": {}, "long": {}}
     regex_patterns = []
@@ -181,7 +181,7 @@ def process_yara_files(client):
                     for cluster_key, cluster in cluster_group.items():
                         if len(cluster) >= MIN_CLUSTER_SIZE:
                             print(f"Generating regex for a cluster in '{length_category}' category...")
-                            regex = generate_regex_for_cluster(cluster, client)
+                            regex = generate_regex_for_cluster(cluster, openai_client)
                             if regex:
                                 if is_regex_too_complex(regex):
                                     print(f"Skipping inclusion of regex {regex}, as it does not meet the complexity criteria")
@@ -241,6 +241,7 @@ def process_yara_files(client):
 def main():
     openai_client = create_openai_client(OPENAI_API_KEY)
     process_yara_files(openai_client)
+
 
 # Entry point
 if __name__ == "__main__":

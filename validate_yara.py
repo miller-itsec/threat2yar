@@ -177,7 +177,8 @@ def process_files(copy_mode, silent_mode, client):
                 if match:
                     year = match.group(1)
                     move_or_copy_file(file_path, f"{OUTPUT_CVE_YEAR_PREFIX}{year}", copy_mode, silent_mode)
-
+                else:
+                    move_or_copy_file(file_path, OUTPUT_NON_CVE_FOLDER, copy_mode, silent_mode)
 
 def initialize_folder(folder):
     if not os.path.exists(folder):
